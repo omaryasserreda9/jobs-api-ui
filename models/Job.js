@@ -13,6 +13,22 @@ const JobSchema = new mongoose.Schema(
       required: [true, "Please provide a position"],
       maxlength: 100,
     },
+    jobLocation: {
+      type: String,
+      required: [true, "Please provide a job location"],
+    },
+    roleDescription: {
+      type: String,
+      required: [true, "Please provide a role description"],
+    },
+    roleRequirements: {
+      type: String,
+      required: [true, "Please provide a role requirements"],
+    },
+    salary: {
+      type: Number,
+      required: [true, "Please provide a salary"],
+    },
     status: {
       type: String,
       enum: ["interview", "pending", "declined"],

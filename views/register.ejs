@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register — Jobs API</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
+      rel="stylesheet"
+    />
+    <%- include('partials/theme-styles') %>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="card">
+        <div class="brand">
+          <h1>Create your account</h1>
+        </div>
+
+        <div
+          class="alert <% if (error) { %>is-visible alert--error<% } else if (success) { %>is-visible alert--success<% } %>"
+          role="status"
+          aria-live="polite"
+        >
+          <% if (error) { %><%= error %><% } %>
+          <% if (success) { %>
+            <%= message %>
+            <% if (token) { %><div class="token-box">JWT (use for API calls): <%= token %></div><% } %>
+          <% } %>
+        </div>
+
+        <form id="register-form" method="post" action="/register">
+          <div class="field">
+            <label for="name">Full name</label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              autocomplete="name"
+              minlength="3"
+              maxlength="50"
+              placeholder="Your name"
+              value="<%= form.name || '' %>"
+              required
+            />
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              placeholder="you@example.com"
+              value="<%= form.email || '' %>"
+              required
+            />
+          </div>
+
+          <div class="row-2">
+            <div class="field">
+              <label for="age">Age</label>
+              <input
+                id="age"
+                name="age"
+                type="number"
+                min="20"
+                max="60"
+                inputmode="numeric"
+                placeholder="25"
+                value="<%= form.age != null && form.age !== '' ? form.age : '' %>"
+                required
+              />
+            </div>
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                inputmode="numeric"
+                pattern="01[0125][0-9]{8}"
+                placeholder="01xxxxxxxxx"
+                value="<%= form.phone || '' %>"
+                required
+              />
+            </div>
+          </div>
+          <p class="hint">Egyptian mobile: 11 digits starting with 010, 011, 012, or 015.</p>
+
+          <div class="field">
+            <label for="password">Password</label>
+            <div class="pw-row">
+              <input
+                id="password"
+                name="password"
+                type="password"
+                autocomplete="new-password"
+                minlength="6"
+                placeholder="At least 6 characters"
+                required
+                style="padding-right: 4.25rem"
+              />
+              <button type="button" class="toggle-pw" data-target="password" aria-label="Show password">
+                Show
+              </button>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="confirmPassword">Confirm password</label>
+            <div class="pw-row">
+              <input
+                id="confirmPassword"
+                name="confirmPassword"
+                type="password"
+                autocomplete="new-password"
+                minlength="6"
+                placeholder="Repeat password"
+                required
+                style="padding-right: 4.25rem"
+              />
+              <button type="button" class="toggle-pw" data-target="confirmPassword" aria-label="Show confirm password">
+                Show
+              </button>
+            </div>
+            <div id="match-hint" class="match-hint" aria-live="polite"></div>
+          </div>
+
+          <button type="submit" class="submit">Create account</button>
+        </form>
+
+        <p class="foot">Already registered? <a href="/login">Sign in</a></p>
+      </div>
+    </div>
+
+    <script src="/js/register.js"></script>
+  </body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit job — Jobs API</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
+      rel="stylesheet"
+    />
+    <%- include('partials/theme-styles') %>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="card card-wide">
+        <a class="back-link" href="/jobs">← Back to jobs</a>
+        <div class="brand" style="text-align: left; margin-bottom: 1.25rem">
+          <h1>Edit job</h1>
+          <p>Update the fields and save to return to your list.</p>
+        </div>
+
+        <div
+          class="alert <% if (error) { %>is-visible alert--error<% } %>"
+          role="status"
+          aria-live="polite"
+        >
+          <% if (error) { %><%= error %><% } %>
+        </div>
+
+        <% var jst = job.status || 'pending'; %>
+        <form method="post" action="/jobs/<%= job.id %>">
+          <div class="field">
+            <label for="company">Company</label>
+            <input id="company" name="company" type="text" maxlength="50" required value="<%= job.company %>" />
+          </div>
+          <div class="field">
+            <label for="position">Position</label>
+            <input id="position" name="position" type="text" maxlength="100" required value="<%= job.position %>" />
+          </div>
+          <div class="field">
+            <label for="jobLocation">Job location</label>
+            <input id="jobLocation" name="jobLocation" type="text" required value="<%= job.jobLocation %>" />
+          </div>
+          <div class="row-2">
+            <div class="field">
+              <label for="salary">Salary</label>
+              <input id="salary" name="salary" type="number" min="0" step="1" required value="<%= job.salary %>" />
+            </div>
+            <div class="field">
+              <label for="status">Status</label>
+              <select id="status" name="status">
+                <option value="pending" <%= jst === 'pending' ? 'selected' : '' %>>Pending</option>
+                <option value="interview" <%= jst === 'interview' ? 'selected' : '' %>>Interview</option>
+                <option value="declined" <%= jst === 'declined' ? 'selected' : '' %>>Declined</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="roleDescription">Role description</label>
+            <textarea id="roleDescription" name="roleDescription" required><%= job.roleDescription %></textarea>
+          </div>
+          <div class="field">
+            <label for="roleRequirements">Role requirements</label>
+            <textarea id="roleRequirements" name="roleRequirements" required><%= job.roleRequirements %></textarea>
+          </div>
+          <button type="submit" class="submit">Save changes</button>
+        </form>
+
+        <p class="foot"><a href="/jobs">Cancel and go back</a></p>
+      </div>
+    </div>
+  </body>
+</html>

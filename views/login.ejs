@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign in — Jobs API</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
+      rel="stylesheet"
+    />
+    <%- include('partials/theme-styles') %>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="card">
+        <div class="brand">
+          <h1>Sign in</h1>
+        </div>
+
+        <div
+          class="alert <% if (error) { %>is-visible alert--error<% } else if (success) { %>is-visible alert--success<% } %>"
+          role="status"
+          aria-live="polite"
+        >
+          <% if (error) { %><%= error %><% } %>
+          <% if (success) { %>
+            <%= message %>
+            <% if (token) { %><div class="token-box">JWT (use for API calls): <%= token %></div><% } %>
+          <% } %>
+        </div>
+
+        <form id="login-form" method="post" action="/login">
+          <div class="field">
+            <label for="email">Email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              placeholder="you@example.com"
+              value="<%= form.email || '' %>"
+              required
+            />
+          </div>
+
+          <div class="field">
+            <label for="password">Password</label>
+            <div class="pw-row">
+              <input
+                id="password"
+                name="password"
+                type="password"
+                autocomplete="current-password"
+                placeholder="Your password"
+                required
+                style="padding-right: 4.25rem"
+              />
+              <button type="button" class="toggle-pw" data-target="password" aria-label="Show password">
+                Show
+              </button>
+            </div>
+          </div>
+
+          <button type="submit" class="submit">Sign in</button>
+        </form>
+
+        <p class="foot">No account? <a href="/register">Create one</a></p>
+      </div>
+    </div>
+
+    <script src="/js/login.js"></script>
+  </body>
+</html>
