@@ -128,7 +128,7 @@ npm start
 
 ---
 
-## 👨‍💻 Author
+## 👨‍💻 APIs By
 
 Mohamed Ibrahim
 
