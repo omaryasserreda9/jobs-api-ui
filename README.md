@@ -35,6 +35,7 @@ Base URL:
 * CRUD Operations for Jobs
 * Error Handling Middleware
 * Rate Limiting & Security Best Practices
+* Chat Bot for Job Recommendation
 
 ---
 
@@ -46,6 +47,8 @@ Base URL:
 | ------ | ----------------------- | ------------------- |
 | POST   | `/api/v1/auth/register` | Register a new user |
 | POST   | `/api/v1/auth/login`    | Login and get token |
+| POST   | `/api/v1/chat`     | Call Chatbot   |
+
 
 ---
 
@@ -105,6 +108,7 @@ Create a `.env` file and add:
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
 JWT_LIFETIME=1d
+CHAT_BOT_API_KEY=Hugging_Face_Key
 ```
 
 ---
