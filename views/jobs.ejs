@@ -1,102 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Your jobs — Jobs API</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
-      rel="stylesheet"
-    />
-    <%- include('partials/theme-styles') %>
-  </head>
-  <body>
-    <div class="app-shell">
-      <header class="page-header">
-        <h1>Your jobs</h1>
-        <div class="header-actions">
-          <span class="muted-small">Hi, <%= user.name %></span>
-          <a class="btn-ghost btn-sm" href="/logout">Log out</a>
-        </div>
-      </header>
 
-      <% var af = typeof addForm !== 'undefined' ? addForm : {}; %>
-      <% var st = af.status || 'pending'; %>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your jobs — Jobs API</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
+    rel="stylesheet" />
+  <%- include('partials/theme-styles') %>
+</head>
 
-      <div
-        class="alert <% if (error) { %>is-visible alert--error<% } %>"
-        role="status"
-        aria-live="polite"
-      >
-        <% if (error) { %><%= error %><% } %>
+<body>
+  <div class="app-shell">
+    <header class="page-header">
+      <h1>Your jobs</h1>
+      <div class="header-actions">
+        <span class="muted-small">Hi, <%= user.name %></span>
+        <a class="btn-ghost btn-sm" href="/logout">Log out</a>
       </div>
+    </header>
 
-      <details class="add-panel" <% if (typeof addPanelOpen !== 'undefined' && addPanelOpen) { %>open<% } %>>
-        <summary>Add job</summary>
-        <div class="panel-body">
-          <form method="post" action="/jobs">
-            <div class="field">
-              <label for="company">Company</label>
-              <input id="company" name="company" type="text" maxlength="50" required value="<%= af.company || '' %>" />
-            </div>
-            <div class="field">
-              <label for="position">Position</label>
-              <input id="position" name="position" type="text" maxlength="100" required value="<%= af.position || '' %>" />
-            </div>
-            <div class="field">
-              <label for="jobLocation">Job location</label>
-              <input id="jobLocation" name="jobLocation" type="text" required value="<%= af.jobLocation || '' %>" />
-            </div>
-            <div class="row-2">
-              <div class="field">
-                <label for="salary">Salary</label>
-                <input id="salary" name="salary" type="number" min="0" step="1" required value="<%= af.salary !== undefined && af.salary !== '' ? af.salary : '' %>" />
-              </div>
-              <div class="field">
-                <label for="status">Status</label>
-                <select id="status" name="status">
-                  <option value="pending" <%= st === 'pending' ? 'selected' : '' %>>Pending</option>
-                  <option value="interview" <%= st === 'interview' ? 'selected' : '' %>>Interview</option>
-                  <option value="declined" <%= st === 'declined' ? 'selected' : '' %>>Declined</option>
-                </select>
-              </div>
-            </div>
-            <div class="field">
-              <label for="roleDescription">Role description</label>
-              <textarea id="roleDescription" name="roleDescription" required><%= af.roleDescription || '' %></textarea>
-            </div>
-            <div class="field">
-              <label for="roleRequirements">Role requirements</label>
-              <textarea id="roleRequirements" name="roleRequirements" required><%= af.roleRequirements || '' %></textarea>
-            </div>
-            <button type="submit" class="submit submit-inline">Save job</button>
-          </form>
+    <% var af=typeof addForm !=='undefined' ? addForm : {}; %>
+      <% var st=af.status || 'pending' ; %>
+
+        <div class="alert <% if (error) { %>is-visible alert--error<% } %>" role="status" aria-live="polite">
+          <% if (error) { %>
+            <%= error %>
+              <% } %>
         </div>
-      </details>
 
-      <% if (jobs && jobs.length) { %>
-      <div class="job-grid">
-        <% jobs.forEach(function (job) { %>
-        <article class="job-card">
-          <span class="status-pill"><%= job.status %></span>
-          <h2><%= job.position %></h2>
-          <p class="meta"><%= job.company %> · <%= job.jobLocation %></p>
-          <p class="salary"><%= job.salary %></p>
-          <p class="desc"><%= job.roleDescription %></p>
-          <div class="btn-row">
-            <a class="btn-ghost btn-sm" href="/jobs/<%= job.id %>/edit">Edit</a>
-            <form method="post" action="/jobs/<%= job.id %>/delete">
-              <button type="submit" class="btn-ghost btn-sm btn-danger">Delete</button>
-            </form>
+        <details class="add-panel" <% if (typeof addPanelOpen !=='undefined' && addPanelOpen) { %>open<% } %>>
+            <summary>Add job</summary>
+            <div class="panel-body">
+              <form method="post" action="/jobs">
+                <div class="field">
+                  <label for="company">Company</label>
+                  <input id="company" name="company" type="text" maxlength="50" required
+                    value="<%= af.company || '' %>" />
+                </div>
+                <div class="field">
+                  <label for="position">Position</label>
+                  <input id="position" name="position" type="text" maxlength="100" required
+                    value="<%= af.position || '' %>" />
+                </div>
+                <div class="field">
+                  <label for="jobLocation">Job location</label>
+                  <input id="jobLocation" name="jobLocation" type="text" required value="<%= af.jobLocation || '' %>" />
+                </div>
+                <div class="row-2">
+                  <div class="field">
+                    <label for="salary">Salary</label>
+                    <input id="salary" name="salary" type="number" min="0" step="1" required
+                      value="<%= af.salary !== undefined && af.salary !== '' ? af.salary : '' %>" />
+                  </div>
+                  <div class="field">
+                    <label for="status">Status</label>
+                    <select id="status" name="status">
+                      <option value="pending" <%=st==='pending' ? 'selected' : '' %>>Pending</option>
+                      <option value="interview" <%=st==='interview' ? 'selected' : '' %>>Interview</option>
+                      <option value="declined" <%=st==='declined' ? 'selected' : '' %>>Declined</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="roleDescription">Role description</label>
+                  <textarea id="roleDescription" name="roleDescription"
+                    required><%= af.roleDescription || '' %></textarea>
+                </div>
+                <div class="field">
+                  <label for="roleRequirements">Role requirements</label>
+                  <textarea id="roleRequirements" name="roleRequirements"
+                    required><%= af.roleRequirements || '' %></textarea>
+                </div>
+                <button type="submit" class="submit submit-inline">Save job</button>
+              </form>
+            </div>
+        </details>
+
+        <% if (jobs && jobs.length) { %>
+          <div class="job-grid">
+            <% jobs.forEach(function (job) { %>
+              <article class="job-card">
+                <span class="status-pill">
+                  <%= job.status %>
+                </span>
+                <h2>
+                  <%= job.position %>
+                </h2>
+                <p class="meta">
+                  <%= job.company %> · <%= job.jobLocation %>
+                </p>
+                <p class="salary">
+                  <%= job.salary %>
+                </p>
+                <p class="desc">
+                  <%= job.roleDescription %>
+                </p>
+                <div class="btn-row">
+                  <a class="btn-ghost btn-sm" href="/jobs/<%= job.id %>/edit">Edit</a>
+                  <form method="post" action="/jobs/<%= job.id %>/delete">
+                    <button type="submit" class="btn-ghost btn-sm btn-danger">Delete</button>
+                  </form>
+                </div>
+              </article>
+              <% }); %>
           </div>
-        </article>
-        <% }); %>
-      </div>
-      <% } else { %>
-      <p class="empty-state">No jobs yet. Use <strong>Add job</strong> above to create one.</p>
-      <% } %>
-    </div>
-  </body>
+          <% } else { %>
+            <p class="empty-state">No jobs yet. Use <strong>Add job</strong> above to create one.</p>
+            <% } %>
+  </div>
+  <%- include('partials/chatbot') %>
+
+</body>
+
 </html>

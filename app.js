@@ -33,13 +33,14 @@ const connectDB = require("./db/connect");
 const authenticateUser = require("./middleware/authentication");
 const requireWebUser = require("./middleware/webAuth");
 const User = require("./models/User");
-const Job = require("./models/Job");
+const Job = require("./models/Job"); 
 const { StatusCodes } = require("http-status-codes");
 
 //routers
 
 const authRouter = require("./routes/auth");
 const jobsRouter = require("./routes/jobs");
+const chatRoutes = require("./routes/chat");
 
 function formatRegisterPageError(err) {
   if (err.name === "ValidationError") {
@@ -289,6 +290,8 @@ app.post("/jobs/:id", requireWebUser, async (req, res, next) => {
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/jobs", authenticateUser, jobsRouter);
+app.use("/api/v1/chat", chatRoutes);
+
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
