@@ -126,14 +126,11 @@ npm start
 
 ## 📌 Notes
 
-* Root route (`/`) is not used — this is an API-only project.
 * All job routes are protected using JWT authentication.
 * Deployed using Railway.
 
 ---
 
-## 👨‍💻 APIs By
 
-Mohamed Ibrahim
 
 
