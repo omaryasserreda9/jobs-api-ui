@@ -81,7 +81,13 @@ app.use(cors());
 app.use(xss());
 // routes
 app.get("/", (req, res) => {
-  res.send("Jobs API is running 🚀");
+  res.render("register", {
+    error: null,
+    success: false,
+    message: "",
+    token: null,
+    form: {},
+  });
 });
 app.get("/register", (req, res) => {
   res.render("register", {

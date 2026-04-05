@@ -116,7 +116,7 @@ CHAT_BOT_API_KEY=Hugging_Face_Key
 ## 🚀 Run Locally
 
 ```bash
-git clone https://github.com/your-username/jobs-api.git
+git clone https://github.com/omaryasserreda9/jobs-api-ui.git
 cd jobs-api
 npm install
 npm start
@@ -127,7 +127,7 @@ npm start
 ## 📌 Notes
 
 * All job routes are protected using JWT authentication.
-* Deployed using Railway.
+* Deployed using Railway Link https://jobs-api-ui-production.up.railway.app/
 
 ---
 
